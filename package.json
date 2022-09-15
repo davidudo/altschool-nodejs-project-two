@@ -1,0 +1,15 @@
+{
+  "name": "altschool-nodejs-project-two",
+  "description": "Altschool NodeJS Assignment H",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "npx nodemon index.js"
+  },
+  "keywords": [],
+  "author": "David Udo",
+  "license": "",
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
