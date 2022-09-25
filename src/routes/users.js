@@ -6,10 +6,10 @@ const {
 } = require("../../db/index.js");
 
 /* ==== Initialise empty array for database ==== */
-let usersDB = [];
+//let usersDB = [];
 
 /* ===== Add all users DB content to empty array ===== */
-usersDB = JSON.parse(fs.readFileSync(usersDbPath, 'utf8'));
+let usersDB = JSON.parse(fs.readFileSync(usersDbPath, 'utf8'));
 
 /* ========================== */
 /* ===== Get All Users ===== */
@@ -60,7 +60,8 @@ const createUser = function (req, res, newUser) {
             message: 'Internal Server Error. Could not save book to database.'
           }));
         }
-
+        
+        res.writeHead(201);
         res.end(JSON.stringify(newUser));
       });
     })

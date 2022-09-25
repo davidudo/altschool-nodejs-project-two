@@ -12,6 +12,9 @@ afterAll(() => {
   resetDb();
 })
 
+/* ========================= */
+/* === Book route test ==== */
+/* ======================= */
 describe("Book Route", () => {
   it("GET /books works", async () => {
     const response = await supertest(server).get("/books");
@@ -19,7 +22,7 @@ describe("Book Route", () => {
     expect(response.status).toBe(200);
     expect(response.body.length).toBe(5);
   });
-  
+
   it("POST /books works", async () => {
     const bodyData = {
       "user": {
@@ -33,11 +36,11 @@ describe("Book Route", () => {
       }
     }
     const response = await supertest(server).post("/books").send(bodyData)
-    expect(response.headers["content-type"]).toBe("application/json")
-    expect(response.status).toBe(201)
-    expect(response.body.title).toBe("New test book")
-    expect(response.body.author).toBe("David Udo")
-    expect(response.body.year).toBe(2022)
+    expect(response.headers["content-type"]).toBe("application/json");
+    expect(response.status).toBe(201);
+    expect(response.body.title).toBe("New test book");
+    expect(response.body.author).toBe("David Udo");
+    expect(response.body.year).toBe(2022);
   })
 
   it("PUT /books works", async () => {
@@ -72,7 +75,7 @@ describe("Book Route", () => {
     expect(response.status).toBe(200);
     expect(response.body.message).toBe("Book successfully deleted!");
   });
-  
+
   it("PUT /books/loanrequest/id works", async () => {
     const bodyData = {
       "user": {
@@ -86,7 +89,7 @@ describe("Book Route", () => {
     expect(response.status).toBe(201);
     expect(response.body.isBookOnLoan).toBe(true);
   });
-  
+
   it("PUT /books/returnbooks/id works", async () => {
     const bodyData = {
       "user": {
@@ -99,5 +102,47 @@ describe("Book Route", () => {
     expect(response.headers["content-type"]).toBe("application/json");
     expect(response.status).toBe(201);
     expect(response.body.isBookOnLoan).toBe(false);
+  });
+});
+
+
+/* ========================= */
+/* === User route test ==== */
+/* ======================= */
+describe("Use Route", () => {
+  it("GET /users works", async () => {
+    const bodyData = {
+      "user": {
+        "email": "udodavidcontact@gmail.com",
+        "password": "davidudo"
+      },
+      "data": {}
+    }
+
+    const response = await supertest(server).get("/users").send(bodyData);
+    expect(response.headers["content-type"]).toBe("application/json");
+    expect(response.status).toBe(200);
+    expect(response.body.length).toBe(5);
+  });
+
+  it("POST /users works", async () => {
+    const bodyData = {
+      "user": {
+        "email": "udodavidcontact@gmail.com",
+        "password": "davidudo"
+      },
+      "data": {
+        "name": "David Udo",
+        "email": "udodavid46.ud@gmail.com",
+        "gender": "Male",
+        "password": "udini_one"
+      }
+    }
+    const response = await supertest(server).post("/users").send(bodyData)
+    expect(response.headers["content-type"]).toBe("application/json")
+    expect(response.status).toBe(201)
+    expect(response.body.name).toBe("David Udo");
+    expect(response.body.email).toBe("udodavid46.ud@gmail.com");
+    expect(response.body.gender).toBe("Male");
   });
 });

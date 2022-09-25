@@ -2,7 +2,7 @@
 
 # Altschool Nodejs Project - Two
 
-After learning **test driven development**, **authentication**, and **authorization** in the third week of the second semester in Altschool, I started building this project in order to test what have learned so far. This project is a modification of [altschool-nodejs-project-two](https://github.com/davidudo/altschool-nodejs-project-one).
+After learning **test driven development**, **authentication**, and **authorization** in the third week of the second semester in Altschool, I started building this project in order to test what have learned so far. This project is a modification of [altschool-nodejs-project-one](https://github.com/davidudo/altschool-nodejs-project-one).
 
 ## Table of contents
 
@@ -26,18 +26,17 @@ After learning **test driven development**, **authentication**, and **authorizat
 
 ### About project
 
-This is an API created with NodeJS. It can be classified into two main routes, the `users` routes and the `books` route. Each route contains the following methods:
+This is an API created with NodeJS. It can be classified into two main routes, the `users` routes and the `books` route. Each route contains the following methods and access control level authentication:
 
 - **Users** route:
-  - createUser ```POST```
-  - authenticateUser ```POST```
-  - getAllUsers ```GET```
+  - createUser ```POST`` ==[admin]==
+  - getAllUsers ```GET``` ==[admin, reader]==
 - **Books** route:
-  - createBook ```POST```
-  - deleteBook ```DELETE```
-  - loanOutBooks ```POST```
-  - returnBooks ```POST```
-  - updateBook ```PUT```
+  - createBook ```POST``` ==[admin]==
+  - deleteBook ```DELETE``` ==[admin]==
+  - loanRequest ```POST``` ==[admin, reader]==
+  - returnBook ```POST``` ==[admin, reader]==
+  - updateBook ```PUT``` ==[admin]==
 
 Also, I built a basic frontend demo application that interacts with the API.
 
@@ -49,26 +48,32 @@ Also, I built a basic frontend demo application that interacts with the API.
 
 Clone repository 
 
-```
+```bash
 git clone https://<insert_your_token>@github.com/davidudo/altschool-nodejs-project-two
 ```
 
 Change directory
 
-```
+```bash
 cd altschool-nodejs-project-two
 ```
 
 Install dependencies
 
-```
+```bash
 npm install
 ```
 
 Start server
 
-```
+```bash
 npm run start:dev
+```
+
+Run test
+
+```bash
+npm run test
 ```
 
 ## My process
@@ -87,10 +92,10 @@ The design process I used to create this API is very simple. First of all I had 
 ### What I learned
 
 - How to setup a simple server with NodeJS
-- Basics of authentication
+- Basics of authentication and access control level authentication 
 - Code documentation
 - How to consume API from frontend
-- How to build a CRUD app
+- How to build a NodeJs CRUD app
 - Basics of error handling
 - How to categorise code files
 

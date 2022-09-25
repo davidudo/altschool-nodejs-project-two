@@ -5,9 +5,9 @@
 * to start the server using (npm run start:dev) in your
 * terminal before you can be able to interact with the
 * API.
-* 
+*
 * NOTE: Some functions are not working because I haven't
-* been able to find a way to set the CORS for headers, 
+* been able to find a way to set the CORS for headers,
 * and methods like PUT and DELETE.
 * */
 
@@ -18,15 +18,14 @@
 /* === Users route buttons === */
 const get_all_users = document.getElementById("get-all-users");
 const create_user = document.getElementById("create-user");
-const authenticate_user = document.getElementById("authenticate-user");
 
 /* === Books route buttons === */
 const get_all_books = document.getElementById("get-all-books");
 const add_book = document.getElementById("add-book");
 const update_book = document.getElementById("update-book");
 const delete_book = document.getElementById("delete-book");
-const loan_books = document.getElementById("loan-books");
-const return_books = document.getElementById("return-books");
+const loan_book = document.getElementById("loan-books");
+const return_book = document.getElementById("return-books");
 
 
 /* ===================================== */
@@ -51,10 +50,16 @@ get_all_books.addEventListener("click", () => {
 add_book.addEventListener("click", () => {
   // Data to be sent to the database
   const data = {
-    title: "Things fall apart",
-    author: "Chinua Achebe",
-    year: 2000,
-  };
+    "user": {
+      "email": "udodavidcontact@gmail.com",
+      "password": "davidudo"
+    },
+    "data": {
+      "title": "The Design of Everyday Things",
+      "author": "Don Norman",
+      "year": 2014
+    }
+  }
 
   fetch('http://localhost:8000/books', {
     method: 'POST',
@@ -72,11 +77,17 @@ add_book.addEventListener("click", () => {
 update_book.addEventListener("click", () => {
   // Data to be sent to the database
   const data = {
-    title: "Things fall apart",
-    author: "David Udo",
-    year: 2000,
-    id: 6
-  };
+    "user": {
+      "email": "udodavidcontact@gmail.com",
+      "password": "davidudo"
+    },
+    "data": {
+      "title": "The Design of Everyday Things",
+      "author": "Don Norman",
+      "year": 1999,
+      "id": 3
+    }
+  }
 
   fetch('http://localhost:8000/books', {
     method: 'PUT',
@@ -93,9 +104,17 @@ update_book.addEventListener("click", () => {
 /* === Delete Book (*Not Functioning) === */
 delete_book.addEventListener("click", () => {
   const id = 6;
+  const data = {
+    "user": {
+      "email": "udodavidcontact@gmail.com",
+      "password": "davidudo"
+    },
+    "data": {}
+  }
 
   fetch('http://localhost:8000/books/6', {
-    method: 'DELETE'
+    method: 'DELETE',
+    body: JSON.stringify(data),
   })
   .then((response) => response.json()).then((data) => {
     console.log('Success:', data);
@@ -106,14 +125,21 @@ delete_book.addEventListener("click", () => {
 });
 
 /* === Loan Books === */
-loan_books.addEventListener("click", () => {
+loan_book.addEventListener("click", () => {
   // Data to be sent to the database
   const data = {
-    id: [1, 2, 3]
-  };
+    "user": {
+      "email": "udodavidcontact@gmail.com",
+      "password": "davidudo"
+    },
+    "data": {}
+  }
 
-  fetch('http://localhost:8000/books/loanout', {
-    method: 'POST',
+  fetch('http://localhost:8000/books/loanrequest/1', {
+    method: 'PUT',
+    headers: {
+      accept: 'application/json',
+    },
     body: JSON.stringify(data),
   })
   .then((response) => response.json()).then((data) => {
@@ -125,14 +151,18 @@ loan_books.addEventListener("click", () => {
 });
 
 /* === Return Books === */
-return_books.addEventListener("click", () => {
+return_book.addEventListener("click", () => {
   // Data to be sent to the database
   const data = {
-    id: [1, 2, 3]
-  };
+    "user": {
+      "email": "udodavidcontact@gmail.com",
+      "password": "davidudo"
+    },
+    "data": {}
+  }
 
-  fetch('http://localhost:8000/books/returnbooks', {
-    method: 'POST',
+  fetch('http://localhost:8000/books/returnbook/4', {
+    method: 'PUT',
     body: JSON.stringify(data),
   })
   .then((response) => response.json()).then((data) => {
@@ -150,7 +180,19 @@ return_books.addEventListener("click", () => {
 
 /* === Get All Users === */
 get_all_users.addEventListener("click", () => {
-  fetch("http://localhost:8000/users")
+  // Data to be sent to the database
+  const data = {
+    "user": {
+      "email": "udodavidcontact@gmail.com",
+      "password": "davidudo"
+    },
+    "data": {}
+  }
+
+  fetch("http://localhost:8000/users", {
+    method: 'GET',
+    body: JSON.stringify(data),
+  })
   .then((res) => {
     return res.json();
   })
@@ -166,33 +208,19 @@ get_all_users.addEventListener("click", () => {
 create_user.addEventListener("click", () => {
   // Data to be sent to the database
   const data = {
-    name: "David Udo",
-    email: "udodavidcontact@gmail.com",
-    gender: "Male",
-    password: "davidudo"
-  };
+    "user": {
+      "email": "udodavidcontact@gmail.com",
+      "password": "davidudo"
+    },
+    "data": {
+      "name": "David Udo",
+      "email": "udodavid46.ud@gmail.com",
+      "gender": "Male",
+      "password": "udini_one"
+    }
+  }
 
   fetch('http://localhost:8000/users', {
-    method: 'POST',
-    body: JSON.stringify(data),
-  })
-  .then((response) => response.json()).then((data) => {
-    console.log('Success:', data);
-  })
-  .catch((error) => {
-    console.error('Error:', error);
-  });
-});
-
-/* === Authenticate User === */
-authenticate_user.addEventListener("click", () => {
-  // Data to be sent to the database
-  const data = {
-    email: "udodavidcontact@gmail.com",
-    password: "davidudo"
-  };
-
-  fetch('http://localhost:8000/authenticateUser', {
     method: 'POST',
     body: JSON.stringify(data),
   })

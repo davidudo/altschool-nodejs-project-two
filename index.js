@@ -1,9 +1,9 @@
 /** ================================================== *
- * =================================================== *
- * This is the file were the server is created and all
- * requests being sent are handled.
- * =================================================== *
- * =================================================== */
+* =================================================== *
+* This is the file were the server is created and all
+* requests being sent are handled.
+* =================================================== *
+* =================================================== */
 
 const http = require("http");
 
@@ -22,9 +22,10 @@ const PORT = 8000;
 /* ======================== */
 const requestHandler = async function (req, res) {
   /* ==== Set Headers === */
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Content-Type", "application/json");
-  
+  res.setHeader("Access-Control-Allow-Methods", "PUT");
+
   if (req.url.startsWith('/users')) {
     userRouteMethods(req, res);
   } else if (req.url.startsWith('/books')) {
@@ -32,7 +33,7 @@ const requestHandler = async function (req, res) {
   } else {
     res.writeHead(404);
     res.end(JSON.stringify({
-      message: '404 Not Found!'
+      message: 'Method Not Supported!'
     }));
   }
 }

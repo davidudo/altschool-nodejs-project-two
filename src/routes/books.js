@@ -9,15 +9,14 @@ const fs = require('fs');
 
 /* ==== Import users and books database ==== */
 const {
-  booksDbPath,
+  booksDbPath
 } = require("../../db/index.js");
 
-/* ==== Initialise empty array for databases ==== */
-let booksDB = [];
-//let loanedBooksDB = [];
+/* ==== Initialise empty array for database ==== */
+//let booksDB = [];
 
-/* ===== Add books DB content to empty array ===== */
-booksDB = JSON.parse(fs.readFileSync(booksDbPath, 'utf8'));
+/* ===== Add books DB content to booksDB variable ===== */
+let booksDB = JSON.parse(fs.readFileSync(booksDbPath, 'utf8'));
 
 
 /* ========================== */
@@ -224,7 +223,6 @@ const loanRequest = function (req, res) {
         message: 'Internal Server Error. Could not update book in database.'
       }));
     }
-    
     res.writeHead(201);
     res.end(JSON.stringify(bookToLoan));
   });

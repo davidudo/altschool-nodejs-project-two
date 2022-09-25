@@ -97,7 +97,7 @@ function bookRouteMethods(req, res) {
   } else {
     res.writeHead(404);
     res.end(JSON.stringify({
-      message: '404 Not Found!'
+      message: 'Method Not Supported!'
     }));
   }
 }
