@@ -29,14 +29,14 @@ After learning **test driven development**, **authentication**, and **authorizat
 This is an API created with NodeJS. It can be classified into two main routes, the `users` routes and the `books` route. Each route contains the following methods and access control level authentication:
 
 - **Users** route:
-  - createUser ```POST`` ==[admin]==
-  - getAllUsers ```GET``` ==[admin, reader]==
+  - createUser ```POST`` <mark>[admin]</mark>
+  - getAllUsers ```GET``` <mark>[admin, reader]</mark>
 - **Books** route:
-  - createBook ```POST``` ==[admin]==
-  - deleteBook ```DELETE``` ==[admin]==
-  - loanRequest ```POST``` ==[admin, reader]==
-  - returnBook ```POST``` ==[admin, reader]==
-  - updateBook ```PUT``` ==[admin]==
+  - createBook ```POST``` <mark>[admin]</mark>
+  - deleteBook ```DELETE``` <mark>[admin]</mark>
+  - loanRequest ```POST``` <mark>[admin, reader]</mark>
+  - returnBook ```POST``` <mark>[admin, reader]</mark>
+  - updateBook ```PUT``` <mark>[admin]</mark>
 
 Also, I built a basic frontend demo application that interacts with the API.
 
